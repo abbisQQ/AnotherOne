@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -46,7 +47,30 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
 
 
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT| ItemTouchHelper.RIGHT) {
 
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                String id = (String)viewHolder.itemView.getTag(R.string.key);
+                String isToDelete = name.getText().toString();
+
+                long idDeleted = getContentResolver().delete(AppContract.BASE_CONTENT_URI," id=?",new String[]{id});
+
+                if(idDeleted>0){
+                    Toast.makeText(getBaseContext(),"deleted",Toast.LENGTH_SHORT).show();
+                }
+
+
+                mAdapter.swapCursor(getAllData());
+
+            }
+        }).attachToRecyclerView(mRecyclerView);
 
     }
 
@@ -77,10 +101,6 @@ public class MainActivity extends AppCompatActivity {
         return db.rawQuery("select * from "+AppContract.TaskEntry.TABLE_NAME,null);
 
     }
-
-
-
-
 
 
 

@@ -38,10 +38,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         if(!mCursor.moveToPosition(position)){
             return;
         }
+        String id =  mCursor.getString(mCursor.getColumnIndex(AppContract.TaskEntry.ID));
         String name  = mCursor.getString(mCursor.getColumnIndex(AppContract.TaskEntry.NAME));
         String rating= mCursor.getString(mCursor.getColumnIndex(AppContract.TaskEntry.RATING));
         holder.infoText.setText(name +"\n"+rating+"\n");
         holder.itemView.setTag(name);
+        holder.itemView.setTag(R.string.key,id);
 
 
 

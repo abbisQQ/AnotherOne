@@ -34,6 +34,8 @@ public class AppContract {
         // "_ID" column in addition to the two below
         public static final String NAME = "name";
         public static final String RATING = "rating";
+        public static final String ID = "id";
+
         static  final  int uricode = 1;
 
         static HashMap<String, String>  values;

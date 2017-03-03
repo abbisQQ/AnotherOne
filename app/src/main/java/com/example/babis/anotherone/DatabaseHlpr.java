@@ -15,7 +15,7 @@ public class DatabaseHlpr extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "tasksDb.db";
 
     // If you change the database schema, you must increment the database version
-    private static final int VERSION = 2;
+    private static final int VERSION = 1;
 
 
     // Constructor
@@ -27,7 +27,7 @@ public class DatabaseHlpr extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("CREATE TABLE "+AppContract.TaskEntry.TABLE_NAME + " ( " +
-                AppContract.TaskEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                AppContract.TaskEntry.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 AppContract.TaskEntry.NAME + " TEXT NOT NULL, "+
                 AppContract.TaskEntry.RATING + " TEXT );");
 

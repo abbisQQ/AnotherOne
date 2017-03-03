@@ -33,6 +33,8 @@ public class BabisProvider extends ContentProvider{
     }
 
 
+
+
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
